@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@700&family=Ubuntu:wght@500&display=swap");
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+}
+
+body {
+  font-family: open-sans;
+}
+
+h1 {
+  font-family: poppins;
+}
+
+[label]::before {
+  content: attr(label);
+  color: royalblue;
+  margin-right: 0.75em;
+}

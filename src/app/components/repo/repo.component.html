@@ -1,0 +1,53 @@
+<!-- repos -->
+<section *ngIf="repos && !loading" class="container mx-auto p-5">
+  <!-- heading -->
+  <h1 class="text-3xl font-bold mt-10">User Repositories</h1>
+  <!-- repos container -->
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10 my-10"
+  >
+    <!-- repo -->
+    <a
+      [href]="repo.html_url"
+      target="_blank"
+      *ngFor="let repo of repos"
+      class="p-6 rounded-lg shadow-xl shadow-slate-300 flex flex-col gap-2 text-wrap transition-all hover:scale-105"
+    >
+      <h2 class="text-xl font-semibold">{{ repo.name }}</h2>
+      <em class="text-gray-500 text-wrap">{{ repo.description }}</em>
+      <time label="CreatedAt:" class="text-sm">
+        {{ repo.created_at | date }}
+      </time>
+      <div class="flex justify-between text-sm">
+        <p label="Watchers:">{{ repo.watchers_count }}</p>
+        <p label="Forks:">{{ repo.forks_count }}</p>
+      </div>
+      <p label="Language:">{{ repo.language }}</p>
+    </a>
+  </div>
+</section>
+
+<!-- repos loading skeleton -->
+<div *ngIf="loading && !error" class="container mx-auto mt-8">
+  <!-- heading skeleton -->
+  <p-skeleton height="4rem"></p-skeleton>
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10 my-10"
+  >
+    <!-- repo skeleton -->
+    <p-skeleton height="10rem"></p-skeleton>
+    <p-skeleton height="10rem"></p-skeleton>
+    <p-skeleton height="10rem"></p-skeleton>
+    <p-skeleton height="10rem"></p-skeleton>
+    <p-skeleton height="10rem"></p-skeleton>
+    <p-skeleton height="10rem"></p-skeleton>
+  </div>
+</div>
+
+<div
+  *ngIf="repos.length === 0"
+  class="flex flex-col justify-center items-center text-center min-h-dvh text-4xl text-red-500"
+>
+  No Public Repositories
+  <p class="text-xs opacity-75">{{ error }}</p>
+</div>

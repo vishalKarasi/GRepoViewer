@@ -1,0 +1,9 @@
+<div *ngIf="totalRecords !== 0">
+  <p-paginator
+    [rows]="pagination.per_page"
+    [totalRecords]="totalRecords"
+    [rowsPerPageOptions]="[2, 5, 10, 20, 40]"
+    (onPageChange)="onPageChange($event)"
+  >
+  </p-paginator>
+</div>
