@@ -45,7 +45,7 @@
 </div>
 
 <div
-  *ngIf="error && repos.length === 0"
+  *ngIf="repos && repos.length === 0"
   class="flex flex-col justify-center items-center text-center min-h-dvh text-4xl text-red-500"
 >
   No Public Repositories
