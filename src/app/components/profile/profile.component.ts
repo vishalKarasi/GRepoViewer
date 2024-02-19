@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { GithubService } from '../../services/github/github.service';
-import { Profile } from './profile.types';
+import { Error, Profile } from './profile.types';
 import { CommonModule } from '@angular/common';
 import { SkeletonModule } from 'primeng/skeleton';
 
@@ -26,7 +26,8 @@ export class ProfileComponent {
   };
 
   loading: boolean = false;
-  error: string = '';
+
+  error: Error = null;
 
   totalRecords: number = 0;
   @Output() totalRecordsChange = new EventEmitter<number>();
@@ -39,7 +40,7 @@ export class ProfileComponent {
 
   ngOnChanges(changes: any) {
     if (changes['username'] && changes['username'].currentValue) {
-      this.error = '';
+      this.error = null;
       this.fetchUserProfile();
     }
   }
@@ -74,8 +75,12 @@ export class ProfileComponent {
         this.totalRecords = public_repos;
         this.totalRecordsChange.emit(this.totalRecords);
       },
-      error: (error) => (this.error = error.message),
-      complete: () => (this.loading = false),
+      error: ({name, status, message}) => this.error = {
+        name,
+        status,
+        message
+      },
+      complete: () => this.loading = false,
     });
   }
 }

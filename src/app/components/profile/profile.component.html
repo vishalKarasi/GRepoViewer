@@ -57,6 +57,14 @@
   *ngIf="error"
   class="flex flex-col justify-center items-center text-center min-h-dvh text-red-500"
 >
-  <b class="text-4xl">User doesn't exist</b>
-  <p class="text-xs opacity-75">{{ error }}</p>
+  <b class="text-4xl">
+    {{
+      error.status == 404
+        ? "User Doesn't Exist"
+        : error.status == 0
+        ? "Network Error"
+        : error.name
+    }}
+  </b>
+  <p class="text-sm opacity-75">{{ error.message }}</p>
 </div>
